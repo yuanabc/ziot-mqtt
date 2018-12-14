@@ -9,6 +9,5 @@ public class InstanceServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(InstanceServerApplication.class, args);
     }
-
 }
 

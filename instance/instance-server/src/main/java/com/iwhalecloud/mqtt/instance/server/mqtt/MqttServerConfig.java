@@ -56,7 +56,10 @@ public class MqttServerConfig {
         mqttConnectOptions.setUserName(username);
         mqttConnectOptions.setPassword(password.toCharArray());
         mqttConnectOptions.setServerURIs(new String[]{hostUrl});
-        mqttConnectOptions.setKeepAliveInterval(2);
+        //心跳
+        mqttConnectOptions.setKeepAliveInterval(20);
+        //连接超时
+        mqttConnectOptions.setConnectionTimeout(30);
         return mqttConnectOptions;
     }
 
@@ -73,6 +76,10 @@ public class MqttServerConfig {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(serviceId, mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultTopic(defaultTopic);
+        //消息是否永久保留
+        messageHandler.setDefaultRetained(true);
+        //消息发布服务质量
+        messageHandler.setDefaultQos(1);
         return messageHandler;
     }
 
